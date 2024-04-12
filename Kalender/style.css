@@ -1,0 +1,78 @@
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header{
+    height:8rem;
+    background:gray;
+    width:100vw;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.weekdagen{
+    width:100vw;
+    height: 5rem;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10rem;
+    border-bottom:0.1rem solid gray;
+}
+
+.dag{
+    font-size:1.1rem;
+    border-bottom:0.1rem solid gray;
+}
+
+.kalendergrafiek{
+    margin:1rem;
+    
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); 
+    grid-template-rows: repeat(5, 7.5rem); 
+    
+}
+
+.grid-item {
+    background-color: #ddd;
+    text-align: center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:10rem;
+    height:5rem;
+}
+
+.controls {
+    display: flex;
+    justify-content:center;
+    gap:8rem;
+    height:2rem;
+}
+
+.controls > button{
+    width:6rem;
+    background:gray;
+    border-radius:1rem;
+    border:0.1rem solid white;
+}
+
+.controls > select{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    height:2rem;
+    background:gray;
+    border-radius:1rem;
+    border:0.1rem solid white;
+    width:6rem;
+}

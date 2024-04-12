@@ -15,7 +15,8 @@ async function fetchData(page) {
 
 function renderPosts(posts) {
   const container = document.getElementById('container');
-  posts.forEach(post => {
+  for(let i =0; i< 5; i++){
+    let post = posts[i];
     const postElement = document.createElement('div');
     postElement.classList.add('post');
     const section = document.createElement('section');
@@ -31,7 +32,11 @@ function renderPosts(posts) {
     `;
     postElement.appendChild(section);
     container.appendChild(postElement);
-  });
+    
+    if(i == 4){
+      observer.observe(postElement);
+    }
+  }
 }
 
 async function loadMorePosts() {
@@ -45,7 +50,7 @@ async function loadMorePosts() {
 
 window.addEventListener('scroll', () => {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-    loadMorePosts();
+  //  loadMorePosts(5);
   }
 });
 
@@ -54,19 +59,21 @@ window.addEventListener('scroll', () => {
   renderPosts(initialData);
 })();
 
-
-async function fetchData(page) {
-  try {
-    const response = await fetch(`data.json?page=${page}&perPage=${perPage}`);
-    const data = await response.json();
-    return shuffleArray(data);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    return [];
-  }
-}
-
 function shuffleArray(array) {
   return array.sort(() => Math.random() - 0.5);
 }
 
+
+
+let options = {
+  threshold: 1.0
+};
+const intersectionCallback = (entries) => {
+  entries.forEach((entry) => {
+      if(entry.isIntersecting){
+        loadMorePosts();
+      }
+  });
+};
+
+let observer = new IntersectionObserver(intersectionCallback, options)
